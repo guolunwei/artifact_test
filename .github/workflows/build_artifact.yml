@@ -13,15 +13,15 @@ jobs:
       - name: Create artifact
         run: |
           wget https://go.dev/dl/go1.23.0.linux-amd64.tar.gz
-          tar -xzvf go1.23.0.linux-amd64.tar.gz 
+          tar -xf go1.23.0.linux-amd64.tar.gz 
           sudo mv go /usr/local/
           export PATH=$PATH:/usr/local/go/bin
           go version
+          echo $GOPATH
           
           git clone https://github.com/gohugoio/hugo.git
           cd hugo
           CGO_ENABLED=1 go install -tags extended
-          ls
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

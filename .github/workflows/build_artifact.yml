@@ -17,14 +17,12 @@ jobs:
           sudo mv go /usr/local/
           export PATH=$PATH:/usr/local/go/bin
           go version
-          echo $GOPATH
           
-          git clone https://github.com/gohugoio/hugo.git
-          cd hugo
-          CGO_ENABLED=1 go install -tags extended
+          CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@latest
+          hugo version
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifact
-          path: hugo/
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: build-artifact
+      #     path: hugo/

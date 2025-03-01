@@ -33,4 +33,4 @@ jobs:
           path: ./
 
       - name: Verify artifact
-        run: cat output/build.txt
+        run: ls

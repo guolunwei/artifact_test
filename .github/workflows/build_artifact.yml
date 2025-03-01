@@ -7,23 +7,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: latest
+          extended: true
 
       - name: Create artifact
         run: |
-          wget https://go.dev/dl/go1.23.0.linux-amd64.tar.gz
-          tar -xf go1.23.0.linux-amd64.tar.gz 
-          sudo mv go /usr/local/
-          export PATH=$PATH:/usr/local/go/bin
-          go version
-          
-          CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@latest
-          export PATH=$PATH:$(go env GOPATH)/bin
-          hugo version
+          hugo new site quickstart
+          cd quickstart
+          git init
+          git submodule add  https://github.com/nunocoracao/blowfish.git themes/blowfish
 
-      # - name: Upload artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: build-artifact
-      #     path: hugo/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: quickstart

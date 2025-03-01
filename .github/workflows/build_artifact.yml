@@ -19,6 +19,7 @@ jobs:
           go version
           
           CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@latest
+          export PATH=$PATH:$(go env GOPATH)/bin
           hugo version
 
       # - name: Upload artifact
